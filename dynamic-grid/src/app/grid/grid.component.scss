@@ -1,0 +1,130 @@
+$mediumMaxWidth: 992px;
+
+.searchInput {
+  padding-left: 10px;
+  padding-right: 15px;
+  @media (max-width: $mediumMaxWidth) {
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+.custom-table {
+  padding-bottom: 50px;
+}
+
+.grid-filters {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.mat-paginator-page-size {
+  display: none !important;
+}
+
+table {
+  width: 100%;
+  background-color: #ffffff;
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid lightgrey;
+}
+
+th {
+  text-align: left;
+  color: rgba(0, 0, 0, .54);
+}
+
+td, th {
+  padding: 0.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+.grid {
+  @media (max-width: $mediumMaxWidth) {
+    display: none;
+  }
+}
+
+.grid-cell {
+  line-height: 40px;
+}
+
+.mobile-sorting {
+  display: none;
+  @media (max-width: $mediumMaxWidth) {
+    display: flex;
+    flex-direction: row;
+  }
+  .order-by {
+    flex-grow: 1;
+    margin-right: 15px;
+  }
+  .order-direction {
+    width: 100px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    button {
+      width: 100%;
+    }
+  }
+  ::ng-deep .mat-form-field-infix {
+    width: auto;
+  }
+}
+
+.accordion {
+  display: none;
+  margin-bottom: 15px;
+  @media (max-width: $mediumMaxWidth) {
+    display: block;
+  }
+  mat-expansion-panel-header {
+    padding: 10px 24px;
+  }
+  .mat-expansion-panel-header-description,
+  .mat-expansion-panel-header-title {
+
+    align-items: center;
+    & ::ng-deep a {
+      color: black;
+      text-decoration: none;
+      pointer-events: none;
+    }
+  }
+  
+  ::ng-deep {
+    .mat-expansion-panel-body {
+      padding: 0 17px 16px;
+      table {
+        td {
+          white-space: normal;
+          &:nth-of-type(1){
+            white-space: nowrap;
+            padding-right: 1em;
+          }
+          &:nth-of-type(2){
+            width: 80%;
+          }
+        }
+        tr {
+          &:nth-last-of-type(1){
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mat-paginator ::ng-deep .mat-paginator-page-size {
+  display: none;
+}

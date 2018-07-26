@@ -1,0 +1,115 @@
+<div class="custom-table">
+  <div class="grid-filters">
+    <div class="searchInput">
+      <mat-form-field floatPlaceholder="never" style="width: 350px">
+        <input matInput #input 
+        [(ngModel)]="state.query" 
+        (ngModelChange)="onSearchInputChanged($event)" 
+        [placeholder]="config.searchPlaceholder" 
+        [formControl]="searchFormControl">
+        
+        <button *ngIf="state.query" mat-button matSuffix mat-icon-button (click)="clearSearchInput()" type="button">
+          <mat-icon class="clear-icon">clear</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+
+    <ng-template #filtersContainer></ng-template>
+  </div>
+
+  <table class="grid" role="grid" matSort (matSortChange)="onSortChange($event)" width="20">
+    <tr class="header">
+    <ng-template ngFor let-column="$implicit" [ngForOf]="config.columns">    
+      <th *ngIf="!column.disabled"
+        [mat-sort-header]="column.name"
+        [disabled]="!column.sortable">
+        {{column.label}}
+      </th>
+    </ng-template>
+    </tr>
+
+    <tr *ngFor="let item of sortedData" class="mat-row">
+      <td *ngFor="let column of enabledColumns">
+        <ng-template [ngIf]="column.templateContent">
+          <ng-container *ngTemplateOutlet="column.content; context: {item: item}"></ng-container>
+        </ng-template>
+
+        <span class="grid-cell" *ngIf="column.functionContent">
+          {{column.content(item)}}
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <div class="mobile-sorting">
+      <div class="order-by">
+          <mat-form-field>
+              <mat-select placeholder="Sort by" [(ngModel)]="this.state.orderBy" (ngModelChange)="onSortDropdownChange($event)">
+                <mat-option [value]="null">No sorting</mat-option>
+                <ng-template ngFor let-column="$implicit" [ngForOf]="sortableColumns">
+                    <mat-option [value]="column.name"  [disabled]="!column.sortable">
+                        {{column.label}}
+                      </mat-option>
+                </ng-template>
+              </mat-select>
+          </mat-form-field>
+      </div>
+      <div class="order-direction">
+        <button mat-button (click)="onSortDirectionButtonChange()" [disabled]="!state.orderBy">
+          <ng-container *ngIf="state.orderBy && state.orderDirection == 'asc'">
+            <mat-icon class="icon">arrow_upward</mat-icon>
+            {{ state.orderDirection | uppercase }}
+          </ng-container>
+          <ng-container *ngIf="state.orderBy && state.orderDirection == 'desc'">
+            <mat-icon class="icon">arrow_downward</mat-icon>
+            {{ state.orderDirection | uppercase }}
+          </ng-container>
+          <ng-container *ngIf="!state.orderBy" >
+            <mat-icon class="icon">swap_vert</mat-icon>
+            Order
+          </ng-container>
+        </button>
+      </div>
+    </div>
+
+  <mat-accordion class="accordion">
+    <mat-expansion-panel *ngFor="let item of sortedData">
+
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <ng-template [ngIf]="config.columns[0].templateContent">
+            <ng-container *ngTemplateOutlet="config.columns[0].content; context: {item: item}"></ng-container>
+          </ng-template>
+  
+          <span *ngIf="config.columns[0].functionContent">
+            {{config.columns[0].content(item)}}
+          </span>
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+  
+      <table>
+        <tr *ngFor="let column of enabledColumns">
+          <td> {{ column.label ? column.label + ': ' : '' }} </td>
+          <td>
+            <ng-template [ngIf]="column.templateContent">
+              <ng-container *ngTemplateOutlet="column.content; context: {item: item}"></ng-container>
+            </ng-template>
+  
+            <span *ngIf="column.functionContent">
+              {{column.content(item)}}
+            </span>
+          </td>
+        </tr>
+      </table>
+    </mat-expansion-panel>
+  </mat-accordion>
+   
+  <mat-paginator  [length]="totalItems" 
+                  [pageIndex]="state.page - 1" 
+                  [pageSize]="config.pageSize"
+                  [pageSizeOptions]="[]"
+                  (page)="onPageChange($event)"> 
+  </mat-paginator>
+</div>
