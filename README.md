@@ -1,9 +1,9 @@
 # Angular Material Grid
-This is a wrapper for standard [mat-autocomplete](https://material.angular.io/components/autocomplete/overview), made to simplify and minimize work with autocomplete inputs. It extends traditional behavior with new functionality such as form control binding, fetch from API service or data array, prefetch items on init, loading animation, template render for options in list. 
+This is an alternaite solution for standard [mat-table](https://material.angular.io/components/table/overview), made to simplify and minimize fetch and display data in a grid. It can remember currrent grid state in local storage, take a one single config object that represents search columns and sort, apply additional custom filters with its logic, format any column display format individual with template render.
 
-See the [demo here.](https://vguleaev.github.io/Angular-Material-Autocomplete/)
+See the [demo here.](https://vguleaev.github.io/Angular-Material-Grid/)
 
-![example](https://pp.userapi.com/c845417/v845417502/b1b35/QT0YqgKaKb4.jpg)
+![example](https://pp.userapi.com/c847120/v847120416/b2574/SIM9K3ysiW8.jpg)
 
 ## Getting started
 
@@ -19,5 +19,10 @@ npm install @angular/material @angular/cdk
 
 Import module with 
 ```
-import { DynamicAutocompleteModule } from '../../node_modules/@vguleaev/angular-material-autocomplete';
+import { NgMatAutocompleteModule } from '../../node_modules/@vguleaev/angular-material-autocomplete';
+```
+
+Use component somewhere in html template
+```
+<ng-mat-grid> </ng-mat-grid>
 ```
