@@ -11,7 +11,7 @@ import { AbstractGridService } from './abstract-grid.service';
 import {debounceTime, distinctUntilChanged, skip} from 'rxjs/operators';
 
 @Component({
-    selector: 'dynamic-grid',
+    selector: 'ng-mat-grid',
     templateUrl: './grid.component.html',
     styleUrls: ['./grid.component.scss']
 })
@@ -49,7 +49,7 @@ export class GridComponent implements OnInit {
         const encodedQuery = btoa(JSON.stringify(this.state));
 
         let params: HttpParams = new HttpParams();
-        params = params.append('Query', encodeURI(encodedQuery));
+        params = params.append('query', encodeURI(encodedQuery));
 
         if (this.config.source instanceof Object) {
             const fetchingService = this.config.source as AbstractGridService<any>;

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { GridConfig } from './grid/grid-config';
 import { GridColumn } from './grid/grid-column';
 import { TableService } from './table.service';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +14,11 @@ export class AppComponent {
 
   gridOptions: GridConfig = new GridConfig();
 
-  constructor(private tableService: TableService) {
+  constructor(private dataService: DataService) {
 
-    this.gridOptions.searchPlaceholder = 'Search by everything..';
-    this.gridOptions.source = tableService;
-    this.gridOptions.pageSize = 10;
+    this.gridOptions.searchPlaceholder = 'Search by name, username or email..';
+    this.gridOptions.source = dataService;
+    this.gridOptions.pageSize = 5;
     this.gridOptions.columns = new Array<GridColumn>();
     this.gridOptions.columns.push({
       name: 'id',
@@ -36,20 +37,28 @@ export class AppComponent {
       content: (item: any) => item.name
     });
     this.gridOptions.columns.push({
-      name: 'price',
-      label: 'Price',
+      name: 'username',
+      label: 'Username',
       searchable: true,
       sortable: true,
       disabled: false,
-      content: (item: any) => item.price + ' $'
+      content: (item: any) => item.username
     });
     this.gridOptions.columns.push({
-      name: 'comment',
-      label: 'Comments',
+      name: 'email',
+      label: 'Email',
       searchable: true,
       sortable: true,
       disabled: false,
-      content: (item: any) => item.comment
+      content: (item: any) => item.email
+    });
+    this.gridOptions.columns.push({
+      name: 'company',
+      label: 'Company',
+      searchable: false,
+      sortable: false,
+      disabled: false,
+      content: (item: any) => item.company.name
     });
   }
 }

@@ -2,13 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { DynamicGridModule } from './grid/grid.module';
+import { NgMatGridModule } from './grid/grid.module';
 import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
 import { CommonModule } from '../../node_modules/@angular/common';
 import { TableService } from './table.service';
 import { MatSortModule, MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatPaginatorModule, MatCardModule, MatTabsModule, MatExpansionModule, MatFormFieldModule, MatButtonModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    DynamicGridModule,
+    NgMatGridModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -38,7 +39,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatExpansionModule,
     MatCardModule
   ],
-  providers: [TableService],
+  providers: [TableService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 {
-  "name": "@vguleaev/dynamic-grid",
-  "version": "0.0.4",
+  "name": "@vguleaev/angular-material-grid",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

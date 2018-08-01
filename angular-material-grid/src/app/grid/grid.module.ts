@@ -26,4 +26,4 @@ import { MatFormFieldModule, MatButtonModule, MatIconModule, MatInputModule, Mat
   declarations: [GridComponent],
   exports: [GridComponent]
 })
-export class DynamicGridModule { }
+export class NgMatGridModule { }
