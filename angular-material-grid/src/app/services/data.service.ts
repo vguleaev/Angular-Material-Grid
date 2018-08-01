@@ -24,7 +24,7 @@ export class DataService implements AbstractGridService<any> {
                 if (state) {
                     if (state.query) {
                         result = result.filter(x => x.name && x.name.toLowerCase().indexOf(state.query.toLowerCase()) > -1 ||
-                                                  x.username && x.email.toLowerCase().indexOf(state.query.toLowerCase()) > -1 ||
+                                                  x.username && x.username.toLowerCase().indexOf(state.query.toLowerCase()) > -1 ||
                                                   x.email && x.email.toLowerCase().indexOf(state.query.toLowerCase()) > -1);
                     }
                     if (state.orderBy) {
@@ -38,10 +38,43 @@ export class DataService implements AbstractGridService<any> {
                                 }
                                 return 0;
                             });
+                        }
+                        if (state.orderBy.toLowerCase() === 'name') {
+                            result.sort((a, b) => {
+                                if (a.name < b.name) {
+                                  return -1;
+                                }
+                                if (a.name > b.name) {
+                                  return 1;
+                                }
+                                return 0;
+                            });
+                        }
+                        if (state.orderBy.toLowerCase() === 'username') {
+                            result.sort((a, b) => {
+                                if (a.username < b.username) {
+                                  return -1;
+                                }
+                                if (a.username > b.username) {
+                                  return 1;
+                                }
+                                return 0;
+                            });
+                        }
+                        if (state.orderBy.toLowerCase() === 'email') {
+                            result.sort((a, b) => {
+                                if (a.email < b.email) {
+                                  return -1;
+                                }
+                                if (a.email > b.email) {
+                                  return 1;
+                                }
+                                return 0;
+                            });
+                        }
 
-                            if (state.orderDirection === 'desc') {
-                                result.reverse();
-                            }
+                        if (state.orderDirection === 'desc') {
+                            result.reverse();
                         }
                     }
                     const startIndex = (state.page - 1) * state.pageSize;

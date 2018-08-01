@@ -19,6 +19,7 @@ export class AppComponent {
     this.gridOptions.searchPlaceholder = 'Search by name, username or email..';
     this.gridOptions.source = dataService;
     this.gridOptions.pageSize = 5;
+    this.gridOptions.mobileViewColumnIndex = 1;
     this.gridOptions.columns = new Array<GridColumn>();
     this.gridOptions.columns.push({
       name: 'id',

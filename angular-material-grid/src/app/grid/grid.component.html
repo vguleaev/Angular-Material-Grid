@@ -77,12 +77,12 @@
 
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <ng-template [ngIf]="config.columns[0].templateContent">
-            <ng-container *ngTemplateOutlet="config.columns[0].content; context: {item: item}"></ng-container>
+          <ng-template [ngIf]="mobileViewHeaderColumn.templateContent">
+            <ng-container *ngTemplateOutlet="mobileViewHeaderColumn.content; context: {item: item}"></ng-container>
           </ng-template>
   
-          <span *ngIf="config.columns[0].functionContent">
-            {{config.columns[0].content(item)}}
+          <span *ngIf="mobileViewHeaderColumn.functionContent">
+            {{mobileViewHeaderColumn.content(item)}}
           </span>
         </mat-panel-title>
         <mat-panel-description>

@@ -9,4 +9,5 @@ export class GridConfig {
     source:  AbstractGridService<any>;
     columns: GridColumn[];
     filters: Type<AbstractGridFilter>[];
+    mobileViewColumnIndex = 0;
 }

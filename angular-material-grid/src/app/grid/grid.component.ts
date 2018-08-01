@@ -179,6 +179,10 @@ export class GridComponent implements OnInit {
         return this.config.columns.filter(x => !x.disabled);
     }
 
+    get mobileViewHeaderColumn(): GridColumn {
+        return this.config.columns[this.config.mobileViewColumnIndex];
+    }
+
     onSortChange(sort: Sort) {
         this.state.orderBy = sort.direction ? sort.active : '';
         this.state.orderDirection = sort.direction ? sort.direction : 'asc';
