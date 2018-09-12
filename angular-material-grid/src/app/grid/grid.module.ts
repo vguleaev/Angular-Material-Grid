@@ -8,7 +8,6 @@ import { MatFormFieldModule, MatButtonModule, MatIconModule, MatInputModule, Mat
 @NgModule({
   imports: [
     CommonModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
