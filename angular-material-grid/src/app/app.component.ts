@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GridConfig } from './grid/grid-config';
 import { GridColumn } from './grid/grid-column';
 import { TableService } from './table.service';
@@ -9,15 +9,16 @@ import { DataService } from './services/data.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'app';
-
   gridOptions: GridConfig = new GridConfig();
 
   constructor(private dataService: DataService) {
+  }
 
+  ngOnInit() {
     this.gridOptions.searchPlaceholder = 'Search by name, username or email..';
-    this.gridOptions.source = dataService;
+    this.gridOptions.source = this.dataService;
     this.gridOptions.pageSize = 5;
     this.gridOptions.mobileViewColumnIndex = 1;
     this.gridOptions.columns = new Array<GridColumn>();
