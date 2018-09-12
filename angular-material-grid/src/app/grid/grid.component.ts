@@ -7,7 +7,7 @@ import { GridState } from './grid-state';
 import { GridColumn } from './grid-column';
 import { GridFilter } from './grid-filter';
 import { AbstractGridFilter } from './abstract-grid-filter';
-import { AbstractGridService } from './abstract-grid.service';
+import { GridService } from './grid.service';
 import {debounceTime, distinctUntilChanged, skip} from 'rxjs/operators';
 
 @Component({
@@ -52,8 +52,12 @@ export class GridComponent implements OnInit {
         params = params.append('query', encodeURI(encodedQuery));
 
         if (this.config.source instanceof Object) {
-            const fetchingService = this.config.source as AbstractGridService<any>;
+            const fetchingService = this.config.source as GridService;
+
             fetchingService.fetch(params).then((result: any) => {
+                if (!result.data && !result.totalItems) {
+                    { throw new Error('Service result should be of type GridData.'); }
+                }
                 this.sortedData = result.data;
                 this.totalItems = result.totalItems;
             });

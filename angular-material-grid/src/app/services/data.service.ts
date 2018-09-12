@@ -2,17 +2,18 @@ import { Observable } from 'rxjs';
 import { delay, filter, map } from 'rxjs/operators';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AbstractGridService } from '../grid/abstract-grid.service';
+import { GridService } from '../grid/grid.service';
 import { AotSummaryResolver } from '../../../node_modules/@angular/compiler';
 import { GridState } from '../grid/grid-state';
+import { GridData } from '../grid/grid-data';
 
 @Injectable()
-export class DataService implements AbstractGridService<any> {
+export class DataService implements GridService {
     private _productUrl = 'assets/json/data.json'; // fake
 
     constructor(private _http: HttpClient) {}
 
-    fetch(params?: HttpParams): Promise<any> {
+    fetch(params?: HttpParams): Promise<GridData> {
         const query = params.get('query');
         const state: GridState = JSON.parse(atob(query));
 

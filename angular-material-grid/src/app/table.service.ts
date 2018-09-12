@@ -1,10 +1,10 @@
 import { TableItem } from './tableItem';
 import { HttpParams } from '../../node_modules/@angular/common/http';
-import { AbstractGridService } from './grid/abstract-grid.service';
+import { GridService } from './grid/grid.service';
 import { Injectable } from '../../node_modules/@angular/core';
 
 @Injectable()
-export class TableService implements AbstractGridService<any> {
+export class TableService implements GridService {
 
     fetch(params?: HttpParams): Promise<any> {
       const result = [
