@@ -10,4 +10,5 @@ export class GridConfig {
     columns: GridColumn[];
     filters: Type<AbstractGridFilter>[];
     mobileViewColumnIndex = 0;
+    rememberState = false;
 }

@@ -43,7 +43,9 @@ export class GridComponent implements OnInit {
     }
 
     public fetch() {
-        this.rememberGridState();
+        if (this.config.rememberState) {
+            this.rememberGridState();
+        }
 
         // encode current state as base-64 encoded ASCII string
         const encodedQuery = btoa(JSON.stringify(this.state));
@@ -120,9 +122,7 @@ export class GridComponent implements OnInit {
         this.searchFormControl.setValue(this.state.query);
         this.searchFormControl.valueChanges.pipe(
             debounceTime(250),
-            distinctUntilChanged(),
-            // Skip the first value since it will trigger
-            skip(1)
+            distinctUntilChanged()
         )
         .subscribe(() => {
             this.state.query = this.searchFormControl.value;
