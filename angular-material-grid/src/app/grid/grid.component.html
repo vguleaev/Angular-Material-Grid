@@ -3,8 +3,6 @@
     <div class="searchInput">
       <mat-form-field floatPlaceholder="never" style="width: 350px">
         <input matInput #input 
-        [(ngModel)]="state.query" 
-        (ngModelChange)="onSearchInputChanged($event)" 
         [placeholder]="config.searchPlaceholder" 
         [formControl]="searchFormControl">
         

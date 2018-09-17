@@ -2,11 +2,12 @@ import { TableItem } from './tableItem';
 import { HttpParams } from '../../node_modules/@angular/common/http';
 import { GridService } from './grid/grid.service';
 import { Injectable } from '../../node_modules/@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class TableService implements GridService {
 
-    fetch(params?: HttpParams): Promise<any> {
+    fetch(params?: HttpParams): Observable<any> {
       const result = [
           new TableItem(1, 'Product 1', 1200, 'Good quality'),
           new TableItem(2, 'Product 2', 990, 'Not very bad item'),
@@ -14,8 +15,8 @@ export class TableService implements GridService {
           new TableItem(4, 'Product 4', 400, 'Some very interesting and nice comment here'),
       ];
 
-      return new Promise((resolve) => {
-        resolve({data: result, totalItems: 4});
+      return of(() => {
+        return {data: result, totalItems: 4};
       });
     }
 }

@@ -54,7 +54,7 @@ export class GridComponent implements OnInit {
         if (this.config.source instanceof Object) {
             const fetchingService = this.config.source as GridService;
 
-            fetchingService.fetch(params).then((result: any) => {
+            fetchingService.fetch(params).subscribe((result: any) => {
                 if (!result.data && !result.totalItems) {
                     { throw new Error('Service result should be of type GridData.'); }
                 }
@@ -126,6 +126,7 @@ export class GridComponent implements OnInit {
         )
         .subscribe(() => {
             this.state.query = this.searchFormControl.value;
+            this.resetPage();
             this.fetch();
         });
     }
@@ -173,6 +174,7 @@ export class GridComponent implements OnInit {
 
     clearSearchInput() {
         this.state.query = '';
+        this.searchFormControl.setValue(this.state.query);
     }
 
     get sortableColumns(): GridColumn[] {
@@ -206,9 +208,5 @@ export class GridComponent implements OnInit {
     onPageChange(event: PageEvent) {
         this.state.page = event.pageIndex + 1;
         this.fetch();
-    }
-
-    onSearchInputChanged(value: any) {
-        this.resetPage();
     }
 }
