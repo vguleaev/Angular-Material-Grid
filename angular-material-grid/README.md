@@ -5,7 +5,7 @@ Angular 4+ and Angular Material should be installed in your project.
 
 # Install 
 
-npm install @vguleaev/dynamic-grid
+npm install @vguleaev/angular-material-grid
 
 # Documentation
 
