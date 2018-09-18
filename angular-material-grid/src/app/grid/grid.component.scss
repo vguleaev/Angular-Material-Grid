@@ -66,6 +66,10 @@ td, th {
   .order-by {
     flex-grow: 1;
     margin-right: 15px;
+
+    .mat-form-field {
+      display: block;
+    }
   }
   .order-direction {
     width: 100px;
