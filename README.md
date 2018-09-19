@@ -85,7 +85,7 @@ export class GridState {
 | orderBy          | ""              | String. Column name by which order is done. |
 | page             | 0               | Number. Current page index. |
 | pageSize         |  0              | Number. Can be ignored on the backend if size is fixed. When size if fixed you should set the same page size on the GridConfig and on the backend api.|
-| filters          | [ ]              | Array of **GridFilter**. Contains all the custom filters if they exist. GridFilter have properties like column name, value and type. The backend api should implement the logic along standard search fetch has additional filters. e.g. Show only items with type == 'New'. <br/> <br/> In such case TypeFilter has columName = 'type' and value = 'New'.  It represents filter by additional conditions. `(name == 'Vlad' AND type == 'New')` | 
+| filters          | [ ]              | Array of **GridFilter**. Contains all custom filters if they exist. GridFilter has properties like column name, value and type. The backend api should implement the logic along standard search fetch has additional filters. e.g. Show only items with type == 'New'. <br/> <br/> In such case TypeFilter has columName = 'type' and value = 'New'.  It represents filter by additional conditions. `(name == 'Vlad' AND type == 'New')` | 
  
  ### GridFilter ### 
  
