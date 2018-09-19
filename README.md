@@ -31,20 +31,56 @@ Use component somewhere in html template
  
  In order to setup a component you must provide a config object. GridConfig class has following properties:
  
-###GridConfig###
+### GridConfig ###
  
-| Attribute        | Default Value   |  Description |
+ ```
+ export class GridConfig {
+    searchPlaceholder = 'Search';
+    pageSize = 10;
+    source:  GridService;
+    columns: GridColumn[];
+    filters: Type<AbstractGridFilter>[];
+    mobileViewColumnIndex = 0;
+    rememberState = false;
+}
+```
+ 
+| Property        | Default Value   |  Description |
 | -------------    | --------------  | ------------- |
-| searchPlaceholder| 'Search'       | Placeholder for search input. |
+| searchPlaceholder| "Search"       | Placeholder for search input. |
 | pageSize         | 10             | Number. Represents how many items will be displayed per one page. <br/> Even page size is controlled on the server this number need to correct display paginator. |
-| source           |   null        |  Service which implements **GridService** inreface. <br/> <br/> Interface has only one method called 'fetch' that supose to make a request and return at Observable of type **GridData**. fetch(params?: HttpParams): Observable<GridData> |
+| source           |   null        |  Service which implements **GridService** inreface. <br/> <br/> Interface has only one method called 'fetch' that supose to make a request and return at Observable of type **GridData**. <br/> `fetch(params?: HttpParams): Observable<GridData>` |
 | columns          | null          | Array of **GridColumn**. Contains all the columns and their config. GridColumn has such properties like name, label, searchable, sortable, disabled and content. |
 | filters          | null          | Array of **AbstractGridFilter**. Create a component that implements AbstractGridFilter interface to change the GridState for specific cases. |
 | mobileViewColumnIndex | 0        | Number. Index of column in columns array. Specifies column will be displayed as card header in mobile view. |
 | rememberState | false | Boolean. When active all the changes in GridState will be saved in localStorage and when you come back to grid page filters, sorting and query can be restored. Dont forget to remove state item if you need to clear grid state.|
 
-###GridState###
+### GridState ###
 
 GridState object is used to fetch items from server and remember/resotre state from loscalStorage.
+
+```
+export class GridState {
+    query: string;
+    searchColumns: Array<string>;
+    orderDirection: 'asc' | 'desc';
+    orderBy: string;
+    page: number;
+    pageSize: number;
+    filters: Array<GridFilter> = new Array<GridFilter>();
+}
+```
+
+| Property        | Default Value   |  Description |
+| -------------    | --------------  | ------------- |
+| query            |  ""             | String. Current text in search input. |
+| searchColumns    |  null           | Array<string>. Columns names (not labels) that are marked as `searchable`. Component collecting all the names of searchable columns and put them into array. The backend api should implement the logic when text from `query` contains in any of these columns. It represents search by multimple properties. `(firstName == 'Vlad' OR lastName == 'Vlad')` |
+| orderDirection   | 'asc'           |  Can be two strings 'asc' | 'desc'. Represents order direction. |
+| orderBy          | ""              | String. Column name by which order is done. |
+| page             | 0               | Number. Current page index. |
+| pageSize         |  0              | Number. Can be ignored at the backend if size is fixed. When size if fixed you should set same page size on the GridConfig and on the backend api.|
+| filters          | [ ]              | Array<GridFilter>. Contains all the custom filters if they exist. GridFilter have properties like column name, value and type. The backend api should implement the logic along standard search fetch has additional filters. e.g. Show only items with type == 'New'. <br/> <br/> In such case TypeFilter has columName = 'type' and value = 'New'.  It represents filter by additional conditions. `(name == 'Vlad' AND type == 'New')` |
+| 
+
 
 
