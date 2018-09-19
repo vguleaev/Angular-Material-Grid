@@ -57,10 +57,10 @@ Use component somewhere in html template
 
 ### GridState ###
 
-GridState object is used to fetch items from server and remember/resotre state from loscalStorage.
+GridState object is used to fetch items from server and remember/restore state.
 
-When any change in grid state is performed (search input, sort or page change) currecnt GridState object is encoded with `btoa()` and 
-a GET request is done with query param called **'query'**.
+When any change in grid state is performed (search input, sort or page change) current GridState object is encoded with `btoa()` and 
+a GET request is done with query param called **'query'** containing state hash.
 
 e.g. GET `http://yoursite/api/grid?query=OBJECT_HASH_HERE`
 
@@ -80,12 +80,32 @@ export class GridState {
 | Property        | Default Value   |  Description |
 | -------------    | --------------  | ------------- |
 | query            |  ""             | String. Current text in search input. |
-| searchColumns    |  null           | Array<string>. Columns names (not labels) that are marked as `searchable`. Component collecting all the names of searchable columns and put them into array. The backend api should implement the logic when text from `query` contains in any of these columns. It represents search by multimple properties. `(firstName == 'Vlad' OR lastName == 'Vlad')` |
+| searchColumns    |  null           | Array<string>. Columns names (not labels) that are marked as `searchable`. Component collects all the names of searchable columns and put them into array. The backend api should implement the logic when text from `query` contains in any of these columns. It represents search by multimple properties. `(firstName == 'Vlad' OR lastName == 'Vlad')` |
 | orderDirection   | 'asc'           |  Can be two strings `'asc' or 'desc'`. Represents order direction. |
 | orderBy          | ""              | String. Column name by which order is done. |
 | page             | 0               | Number. Current page index. |
-| pageSize         |  0              | Number. Can be ignored at the backend if size is fixed. When size if fixed you should set same page size on the GridConfig and on the backend api.|
-| filters          | [ ]              | Array<GridFilter>. Contains all the custom filters if they exist. GridFilter have properties like column name, value and type. The backend api should implement the logic along standard search fetch has additional filters. e.g. Show only items with type == 'New'. <br/> <br/> In such case TypeFilter has columName = 'type' and value = 'New'.  It represents filter by additional conditions. `(name == 'Vlad' AND type == 'New')` | 
+| pageSize         |  0              | Number. Can be ignored on the backend if size is fixed. When size if fixed you should set the same page size on the GridConfig and on the backend api.|
+| filters          | [ ]              | Array of **GridFilter**. Contains all the custom filters if they exist. GridFilter have properties like column name, value and type. The backend api should implement the logic along standard search fetch has additional filters. e.g. Show only items with type == 'New'. <br/> <br/> In such case TypeFilter has columName = 'type' and value = 'New'.  It represents filter by additional conditions. `(name == 'Vlad' AND type == 'New')` | 
+ 
+ ### GridFilter ### 
+ 
+ ```
+ export class GridFilter {
+    name: string;
+    columnName: string;
+    value: string;
+    type: GridFilterType;
+}
+
+export enum GridFilterType {
+    Equals = 1,
+    Contains = 2,
+    Between = 3
+}
+```
+
+
+
 
 
 
