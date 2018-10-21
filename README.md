@@ -50,10 +50,10 @@ Use component somewhere in html template
 | searchPlaceholder| "Search"       | Placeholder for search input. |
 | pageSize         | 10             | Number. Represents how many items will be displayed per page. <br/> Even if page size is controlled on the server, this number is needed to correctly display paginator. |
 | source           |   null        |  Service which implements **GridService** inreface. <br/> <br/> Interface has only one method called 'fetch' that supose to make a request and return at Observable of type **GridData**. <br/> `fetch(params?: HttpParams): Observable<GridData>` <br/><br/> This means you should map result from your API to object of type [GridData](#griddata). |
-| columns          | null          | Array of **GridColumn**. Contains all the columns and their config. GridColumn has such properties like name, label, searchable, sortable, disabled and content. |
+| columns          | null          | Array of **GridColumn**. Contains all the columns and their config. [GridColumn](#gridcolumn) has such properties like name, label, searchable, sortable, disabled and content. |
 | filters          | null          | Array of **AbstractGridFilter**. Create a component that implements AbstractGridFilter interface to change the GridState for specific cases. |
 | mobileViewColumnIndex | 0        | Number. Index of column in columns array. Specifies column will be displayed as card header in mobile view. |
-| rememberState | false | Boolean. When active all the changes in GridState will be saved in localStorage. When you come back to grid page filters, sorting and query can be restored. Dont forget to remove state item if you need to clear grid state. For example, when user logs out or logs in.|
+| rememberState | false | Boolean. When active all the changes in [GridState](#gridstate) will be saved in localStorage. When you come back to grid page filters, sorting and query can be restored. Dont forget to remove state item if you need to clear grid state. For example, when user logs out or logs in.|
 
 ### GridService ### 
 
@@ -107,6 +107,19 @@ export class GridState {
 | pageSize         |  0              | Number. Can be ignored on the backend if size is fixed. When size if fixed you should set the same page size on the GridConfig and on the backend api.|
 | filters          | [ ]              | Array of **GridFilter**. Contains all custom filters if they exist. GridFilter has properties like column name, value and type. The backend api should implement the logic along standard search to support additional filters.<br/> <br/> e.g. Show only items with type == 'New'. <br/><br/> In such case TypeFilter has columName = 'type' and value = 'New'.  It represents filter by additional conditions. `((firstName == 'Vlad' OR lastName == 'Vlad') AND type == 'New')` | 
  
+### GridColumn ### 
+
+```
+export class GridColumn {
+    name: string;
+    label: string;
+    searchable: boolean;
+    sortable: boolean;
+    content: any;
+    disabled: boolean;
+}
+```
+
  ### GridFilter ### 
  
  ```
@@ -123,7 +136,6 @@ export enum GridFilterType {
     Between = 3
 }
 ```
-
 
 
 
