@@ -59,9 +59,11 @@ Use component somewhere in html template
 
 Service provided in "source" property of config should implement this interface.
 
+```
 export interface GridService {
     fetch(params?: HttpParams): Observable<GridData>;
 }
+```
 
 ### GridData ###
 
