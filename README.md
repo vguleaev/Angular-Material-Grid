@@ -153,12 +153,14 @@ Component can not be used without proper defined config object.
 
 ### Basic usage
 
-Miminal number of attributes is **one**. You can create an items array of objects and pass it to `source` attribute.
+This example defines a grid with two columns (Id and Name). Both are displayed and sortable, but search should be implemented only by name, because this column is marked as searchable. 
+
+All fetch logic is implemented in dataService service which should implement [GridService](#gridservice) interface. When any event like search, sort, next page is fired, method with name 'fetch' is called from dataService object. This method is expected to return an Observable of [GridData](#griddata).
 
 ```javascript
   // in ts file
   gridConfig: GridConfig = new GridConfig();
-  gridName: string = "usersGrid";
+  gridName: string = 'usersGrid';
   
   constructor(private dataService: DataService) {
     this.gridOptions.searchPlaceholder = 'Search by name';
