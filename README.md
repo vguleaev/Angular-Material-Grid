@@ -34,13 +34,13 @@ For more examples [click here](#examples).
 
 GridComponent has only two attributes. ( or @Input() properties) 
 
-| Attribute Name   |     Required   |
-| -------------    | -------------- | 
-|       config     |    yes         |
-|     gridName     |     no         |
+| Attribute Name   |   Type      |     Required   |
+| -------------    | ----------  | -------------- | 
+|       config     |  GridConfig |    yes         |
+|     gridName     |  string     |     no         |
  
- In order to setup a component you **must** provide a ```config``` object. Read about [GridConfig](#gridconfig) right below.
- Attribute ```gridName``` is needed only when set 'rememberState' property of config object to true. This is used to save current grid state in localStorage and then restore state when neeeded.
+ In order to setup a component you **must** provide a ```config``` object. Read about [GridConfig](#gridconfig) right below. <br/>
+ Attribute ```gridName``` is needed **only** when set 'rememberState' property of config object to true. This is used to save current grid state in localStorage and then restore it when neeeded.
  
 ### GridConfig ###
  
