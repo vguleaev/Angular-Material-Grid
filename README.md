@@ -53,7 +53,7 @@ Use component somewhere in html template
 | columns          | null          | Array of **GridColumn**. Contains all the columns and their config. GridColumn has such properties like name, label, searchable, sortable, disabled and content. |
 | filters          | null          | Array of **AbstractGridFilter**. Create a component that implements AbstractGridFilter interface to change the GridState for specific cases. |
 | mobileViewColumnIndex | 0        | Number. Index of column in columns array. Specifies column will be displayed as card header in mobile view. |
-| rememberState | false | Boolean. When active all the changes in GridState will be saved in localStorage and when you come back to grid page filters, sorting and query can be restored. Dont forget to remove state item if you need to clear grid state.|
+| rememberState | false | Boolean. When active all the changes in GridState will be saved in localStorage. When you come back to grid page filters, sorting and query can be restored. Dont forget to remove state item if you need to clear grid state. For example, when user logs out or logs in.|
 
 ### GridService ### 
 
