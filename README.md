@@ -55,8 +55,16 @@ Use component somewhere in html template
 | mobileViewColumnIndex | 0        | Number. Index of column in columns array. Specifies column will be displayed as card header in mobile view. |
 | rememberState | false | Boolean. When active all the changes in GridState will be saved in localStorage and when you come back to grid page filters, sorting and query can be restored. Dont forget to remove state item if you need to clear grid state.|
 
+### GridService ### 
+
+Service provided in "source" property of config should implement this interface.
+
+export interface GridService {
+    fetch(params?: HttpParams): Observable<GridData>;
+}
 
 ### GridData ###
+
 This object should be returned by service you provided in "source" property of GridConfig. 
 ```
 export interface GridData {
