@@ -27,9 +27,20 @@ Use component somewhere in html template
 ```
 <ng-mat-grid> </ng-mat-grid>
 ```
- ## Documentation
+
+For more examples [click here](#examples).
+
+ ## Documentation ##
+
+GridComponent has only two attributes. ( or @Input() properties) 
+
+| Attribute Name   |     Required   |
+| -------------    | -------------- | 
+|       config     |    yes         |
+|     gridName     |     no         |
  
- In order to setup a component you must provide a config object. GridConfig class has following properties:
+ In order to setup a component you **must** provide a ```config``` object. Read about [GridConfig](#gridconfig) right below.
+ Attribute ```gridName``` is needed only when set 'rememberState' property of config object to true. This is used to save current grid state in localStorage and then restore state when neeeded.
  
 ### GridConfig ###
  
