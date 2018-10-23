@@ -1,6 +1,5 @@
 # Angular Material Grid
-This is an alternative solution for standard [mat-table](https://material.angular.io/components/table/overview), made to simplify and minimize fetch and display data in a grid. It can remember currrent grid state, take one single config object to control columns, sort, order, cell display format and pagination.You can apply additional custom filters with its logic, change column display format with
-any rich template. Mobile view is also supported.
+This is an alternative solution for standard [mat-table](https://material.angular.io/components/table/overview), made to simplify and minimize fetch and display data in a grid. It can remember currrent grid state, take one single config object to control columns displayed, order, data sorting, cell display format and pagination. You can apply additional custom filters with its logic, change column display format with a rich template. Mobile view is also supported.
 
 See the [demo here.](https://vguleaev.github.io/Angular-Material-Grid/)
 
