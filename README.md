@@ -163,28 +163,30 @@ All fetch logic is implemented in dataService service which should implement [Gr
   gridName: string = 'usersGrid';
   
   constructor(private dataService: DataService) {
-    this.gridOptions.searchPlaceholder = 'Search by name';
-    this.gridOptions.source = this.dataService;
-    this.gridOptions.pageSize = 5;
-    this.gridOptions.mobileViewColumnIndex = 1; // in mobile view 'Name' will be card header
-    this.gridOptions.rememberState = true;  // this options requires gridName attribute 
-    this.gridOptions.columns = new Array<GridColumn>();
-    this.gridOptions.columns.push({
-      name: 'id',
-      label: 'Id',
-      searchable: false,
-      sortable: true,
-      disabled: false,
-      content: (item: any) => item.id
-    });
-    this.gridOptions.columns.push({
-      name: 'name',
-      label: 'Name',
-      searchable: true,
-      sortable: true,
-      disabled: false,
-      content: (item: any) => item.name
-    });
+      this.gridOptions = {
+      searchPlaceholder: 'Search by name',
+      source: this.dataService,
+      pageSize: 5,
+      mobileViewColumnIndex: 1,
+      rememberState: false,
+      filters: [],
+      columns: [{
+        name: 'id',
+        label: 'Id',
+        searchable: false,
+        sortable: true,
+        disabled: false,
+        content: (item: any) => item.id
+      },
+      {
+        name: 'name',
+        label: 'Name',
+        searchable: true,
+        sortable: true,
+        disabled: false,
+        content: (item: any) => item.name
+      }
+    ]} as GridConfig;
   }
   
   // in html template
