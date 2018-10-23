@@ -148,7 +148,7 @@ export enum GridFilterType {
 
 ## Examples
 
-Component can not be used without proper defined config object.
+> Component can not be used without proper defined config object.
 
 ### Basic usage
 
