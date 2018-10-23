@@ -163,29 +163,29 @@ All fetch logic is implemented in dataService service which should implement [Gr
   
   constructor(private dataService: DataService) {
       this.gridOptions = {
-       searchPlaceholder: 'Search by name',
-       source: this.dataService,
-       pageSize: 5,
-       mobileViewColumnIndex: 1,
-       rememberState: false,
-       filters: [],
-       columns: [{
-         name: 'id',
-         label: 'Id',
-         searchable: false,
-         sortable: true,
-         disabled: false,
-         content: (item: any) => item.id
-       },
-       {
-         name: 'name',
-         label: 'Name',
-         searchable: true,
-         sortable: true,
-         disabled: false,
-         content: (item: any) => item.name
-       }
-    ]} as GridConfig;
+        searchPlaceholder: 'Search by name',
+        source: this.dataService,
+        pageSize: 5,
+        mobileViewColumnIndex: 1,
+        rememberState: false,
+        filters: [],
+        columns: [{
+          name: 'id',
+          label: 'Id',
+          searchable: false,
+          sortable: true,
+          disabled: false,
+          content: (item: any) => item.id
+        },
+        {
+          name: 'name',
+          label: 'Name',
+          searchable: true,
+          sortable: true,
+          disabled: false,
+          content: (item: any) => item.name
+        }
+      ]} as GridConfig;
   }
   
   // in html template
