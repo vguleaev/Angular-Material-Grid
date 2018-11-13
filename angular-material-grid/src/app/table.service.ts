@@ -1,6 +1,6 @@
 import { TableItem } from './tableItem';
 import { HttpParams } from '../../node_modules/@angular/common/http';
-import { GridService } from './grid/grid.service';
+import { GridService } from 'grid';
 import { Injectable } from '../../node_modules/@angular/core';
 import { Observable, of } from 'rxjs';
 

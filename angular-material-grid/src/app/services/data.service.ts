@@ -2,10 +2,7 @@ import { Observable } from 'rxjs';
 import { delay, filter, map } from 'rxjs/operators';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GridService } from '../grid/grid.service';
-import { AotSummaryResolver } from '../../../node_modules/@angular/compiler';
-import { GridState } from '../grid/grid-state';
-import { GridData } from '../grid/grid-data';
+import { GridService, GridState, GridData } from 'grid';
 
 @Injectable()
 export class DataService implements GridService {

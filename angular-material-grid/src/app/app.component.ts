@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GridConfig } from './grid/grid-config';
 import { DataService } from './services/data.service';
+import { GridConfig } from 'grid';
 
 @Component({
   selector: 'app-root',
