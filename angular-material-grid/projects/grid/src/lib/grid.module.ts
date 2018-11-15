@@ -3,7 +3,19 @@ import { CommonModule } from '@angular/common';
 import { GridComponent } from './grid.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule, MatButtonModule, MatIconModule, MatInputModule, MatSelectModule, MatSortModule, MatTableModule, MatPaginatorModule, MatTabsModule, MatExpansionModule, MatCardModule } from '@angular/material';
+import {
+  MatFormFieldModule,
+  MatButtonModule,
+  MatIconModule,
+  MatInputModule,
+  MatSelectModule,
+  MatSortModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatTabsModule,
+  MatExpansionModule,
+  MatCardModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -25,4 +37,4 @@ import { MatFormFieldModule, MatButtonModule, MatIconModule, MatInputModule, Mat
   declarations: [GridComponent],
   exports: [GridComponent]
 })
-export class NgMatGridModule { }
+export class NgMatGridModule {}

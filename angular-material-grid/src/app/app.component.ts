@@ -19,41 +19,42 @@ export class AppComponent implements OnInit {
       mobileViewColumnIndex: 1,
       rememberState: false,
       filters: [],
-      columns: [{
-        name: 'id',
-        label: 'Id',
-        searchable: true,
-        sortable: true,
-        disabled: false,
-        content: (item: any) => item.id
-      },
-      {
-        name: 'name',
-        label: 'Name',
-        searchable: true,
-        sortable: true,
-        disabled: false,
-        content: (item: any) => item.name
-      },
-      {
-        name: 'email',
-        label: 'Email',
-        searchable: true,
-        sortable: true,
-        disabled: false,
-        content: (item: any) => item.email
-      },
-      {
-        name: 'company',
-        label: 'Company',
-        searchable: false,
-        sortable: false,
-        disabled: false,
-        content: (item: any) => item.company.name
-      }
-    ]} as GridConfig;
+      columns: [
+        {
+          name: 'id',
+          label: 'Id',
+          searchable: true,
+          sortable: true,
+          disabled: false,
+          content: (item: any) => item.id
+        },
+        {
+          name: 'name',
+          label: 'Name',
+          searchable: true,
+          sortable: true,
+          disabled: false,
+          content: (item: any) => item.name
+        },
+        {
+          name: 'email',
+          label: 'Email',
+          searchable: true,
+          sortable: true,
+          disabled: false,
+          content: (item: any) => item.email
+        },
+        {
+          name: 'company',
+          label: 'Company',
+          searchable: false,
+          sortable: false,
+          disabled: false,
+          content: (item: any) => item.company.name
+        }
+      ]
+    } as GridConfig;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

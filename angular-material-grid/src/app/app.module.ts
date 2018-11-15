@@ -6,15 +6,25 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '../../node_modules/@angular/forms';
 import { CommonModule } from '../../node_modules/@angular/common';
 import { TableService } from './table.service';
-import { MatSortModule, MatSelectModule, MatInputModule, MatIconModule, MatTableModule, MatPaginatorModule, MatCardModule, MatTabsModule, MatExpansionModule, MatFormFieldModule, MatButtonModule } from '@angular/material';
+import {
+  MatSortModule,
+  MatSelectModule,
+  MatInputModule,
+  MatIconModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatCardModule,
+  MatTabsModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatButtonModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataService } from './services/data.service';
 import { NgMatGridModule } from 'grid';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -39,4 +49,4 @@ import { NgMatGridModule } from 'grid';
   providers: [TableService, DataService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
