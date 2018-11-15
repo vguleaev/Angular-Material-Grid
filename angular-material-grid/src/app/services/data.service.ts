@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
-import { delay, filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GridService, GridState, GridData } from 'grid';
+import { GridService, GridState, GridData } from '@vguleaev/angular-material-grid';
 
 @Injectable()
 export class DataService implements GridService {

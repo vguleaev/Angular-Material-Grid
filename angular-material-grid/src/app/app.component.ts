@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { DataService } from './services/data.service';
-import { GridConfig } from 'grid';
+import { GridConfig } from '@vguleaev/angular-material-grid';
 import { PositionFilterComponent } from './filters/position-filter/position-filter.component';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { Positions } from './constatns';
+import { Positions } from './constants';
 
 @Component({
   selector: 'app-root',

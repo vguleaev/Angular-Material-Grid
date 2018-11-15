@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractGridFilter, GridFilter, GridFilterType, FilterService } from 'grid';
+import { AbstractGridFilter, GridFilter, GridFilterType, FilterService } from '@vguleaev/angular-material-grid';
 import { FormControl } from '@angular/forms';
-import { Positions } from 'src/app/constatns';
+import { Positions } from 'src/app/constants';
 
 @Component({
   selector: 'app-position-filter',

@@ -24,7 +24,7 @@ import {
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataService } from './services/data.service';
-import { NgMatGridModule } from 'grid';
+import { NgMatGridModule } from '@vguleaev/angular-material-grid';
 import { PositionFilterComponent } from './filters/position-filter/position-filter.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { GridSettingsComponent } from './components/grid-settings/grid-settings.component';
