@@ -14,7 +14,8 @@
     "format:fix-all": "prettier --write **/*{.ts,.css,.scss}",
     "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\"",
     "format:check-grid": "prettier --config ./.prettierrc --list-different \"projects/grid/src/lib/**/*{.ts,.js,.json,.css,.scss}\"",
-    "publish-gh": "ng build --prod --base-href https://vguleaev.github.io/Angular-Material-Autocomplete/ && angular-cli-ghpages"
+    "publish-gh": "ng build --prod --base-href https://vguleaev.github.io/Angular-Material-Autocomplete/ && angular-cli-ghpages",
+    "publish-npm": "npm publish dist/grid --access=public"
   },
   "husky": {
     "hooks": {
