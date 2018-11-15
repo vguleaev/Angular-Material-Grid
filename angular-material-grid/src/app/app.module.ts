@@ -17,14 +17,20 @@ import {
   MatTabsModule,
   MatExpansionModule,
   MatFormFieldModule,
-  MatButtonModule
+  MatButtonModule,
+  MatDialogModule,
+  MatMenuModule,
+  MatListModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DataService } from './services/data.service';
 import { NgMatGridModule } from 'grid';
+import { PositionFilterComponent } from './filters/position-filter/position-filter.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { GridSettingsComponent } from './components/grid-settings/grid-settings.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PositionFilterComponent, ConfirmDialogComponent, GridSettingsComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -44,9 +50,13 @@ import { NgMatGridModule } from 'grid';
     MatPaginatorModule,
     MatTabsModule,
     MatExpansionModule,
-    MatCardModule
+    MatCardModule,
+    MatDialogModule,
+    MatMenuModule,
+    MatListModule
   ],
   providers: [TableService, DataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [PositionFilterComponent, ConfirmDialogComponent]
 })
 export class AppModule {}

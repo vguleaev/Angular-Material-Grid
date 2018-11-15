@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { DataService } from './services/data.service';
 import { GridConfig } from 'grid';
+import { PositionFilterComponent } from './filters/position-filter/position-filter.component';
+import { MatDialog } from '@angular/material';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { Positions } from './constatns';
 
 @Component({
   selector: 'app-root',
@@ -8,17 +12,20 @@ import { GridConfig } from 'grid';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
+  @ViewChild('actionsTemplate') actionsTemplate: TemplateRef<any>;
+
   gridOptions: GridConfig = new GridConfig();
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private matDialog: MatDialog) {}
+
+  ngOnInit() {
     this.gridOptions = {
       searchPlaceholder: 'Search by name, username or email..',
       source: this.dataService,
       pageSize: 5,
       mobileViewColumnIndex: 1,
       rememberState: false,
-      filters: [],
+      filters: [PositionFilterComponent],
       columns: [
         {
           name: 'id',
@@ -51,10 +58,50 @@ export class AppComponent implements OnInit {
           sortable: false,
           disabled: false,
           content: (item: any) => item.company.name
+        },
+        {
+          name: 'title',
+          label: 'Title',
+          searchable: false,
+          sortable: false,
+          disabled: false,
+          content: (item: any) => Positions[item.title]
+        },
+        {
+          name: 'phone',
+          label: 'Phone',
+          searchable: false,
+          sortable: false,
+          disabled: false,
+          content: (item: any) => item.phone
+        },
+        {
+          name: 'actions',
+          label: '',
+          searchable: false,
+          sortable: false,
+          disabled: false,
+          content: this.actionsTemplate
         }
       ]
     } as GridConfig;
   }
 
-  ngOnInit() {}
+  public deleteEntity(entity: any) {
+    const dialogRef = this.matDialog.open(ConfirmDialogComponent, {
+      panelClass: 'small-modal-dialog',
+      closeOnNavigation: true,
+      autoFocus: false,
+      data: {
+        title: 'Are you sure you want to delete it?',
+        content: ''
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data) {
+        alert('Entity deleted');
+      }
+    });
+  }
 }

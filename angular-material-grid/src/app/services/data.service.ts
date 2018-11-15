@@ -21,13 +21,24 @@ export class DataService implements GridService {
         if (state) {
           if (state.query) {
             result = result.filter(
-              x =>
-                (x.name && x.name.toLowerCase().indexOf(state.query.toLowerCase()) > -1) ||
-                (x.username && x.username.toLowerCase().indexOf(state.query.toLowerCase()) > -1) ||
-                (x.email && x.email.toLowerCase().indexOf(state.query.toLowerCase()) > -1)
+              user =>
+                (user.name && user.name.toLowerCase().indexOf(state.query.toLowerCase()) > -1) ||
+                (user.username && user.username.toLowerCase().indexOf(state.query.toLowerCase()) > -1) ||
+                (user.email && user.email.toLowerCase().indexOf(state.query.toLowerCase()) > -1)
             );
-            totalItemsCounter = result.length;
           }
+
+          if (state.filters && state.filters.length > 0) {
+            const positionFilter = state.filters.find(x => x.name === 'PositionFilter');
+
+            if (positionFilter) {
+              const selectedPositions = JSON.parse(positionFilter.value) as string[];
+              result = result.filter(user => selectedPositions.some(position => user.title === position));
+            }
+          }
+
+          totalItemsCounter = result.length;
+
           if (state.orderBy) {
             if (state.orderBy.toLowerCase() === 'id') {
               result.sort((a, b) => {
@@ -78,8 +89,9 @@ export class DataService implements GridService {
               result.reverse();
             }
           }
+
           const startIndex = (state.page - 1) * state.pageSize;
-          const endIndex = result.length - startIndex > state.pageSize ? state.pageSize : result.length;
+          const endIndex = result.length - startIndex > state.pageSize ? state.pageSize * state.page : result.length;
           result = result.slice(startIndex, endIndex);
         }
         return { data: result, totalItems: totalItemsCounter };

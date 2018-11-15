@@ -1,0 +1,13 @@
+<div class="position-filter">
+  <mat-form-field>
+    <mat-select placeholder="Title" [formControl]="titleSelect" multiple>
+      <mat-select-trigger>
+        {{ titleSelect.value && titleSelect.value[0] ? titleSelect.value[0].label : '' }}
+        <span *ngIf="titleSelect.value?.length > 1">
+          (+{{ titleSelect.value.length - 1 }} {{ titleSelect.value?.length === 2 ? 'other' : 'others' }})
+        </span>
+      </mat-select-trigger>
+      <mat-option *ngFor="let position of positionsList" [value]="position">{{ position.label }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

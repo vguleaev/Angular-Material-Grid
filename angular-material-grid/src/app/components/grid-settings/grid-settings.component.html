@@ -1,0 +1,12 @@
+<div class="grid-settings">
+  <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>settings</mat-icon></button>
+  <mat-menu #menu="matMenu">
+    <p class="menu-header">Pick columns to display:</p>
+    <div *ngFor="let column of gridOptions.columns">
+      <button *ngIf="column.label" (click)="toggleColumn($event, column)" mat-menu-item>
+        <mat-icon *ngIf="!column.disabled">done</mat-icon>
+        <span [class.disabled-column-label]="column.disabled">{{ column.label }}</span>
+      </button>
+    </div>
+  </mat-menu>
+</div>

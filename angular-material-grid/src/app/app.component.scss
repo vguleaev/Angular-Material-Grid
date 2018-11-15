@@ -7,5 +7,23 @@ $candy-app-accent: mat-palette($mat-pink, A200, A100, A400);
 $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 @include angular-material-theme($candy-app-theme);
 
-mat-card {
+.actions-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+::ng-deep {
+  .grid-settings {
+    position: absolute;
+    right: 20px;
+    margin-top: 20px;
+    margin-right: 15px;
+  }
+
+  @media only screen and (max-width: 980px) {
+    .grid-settings {
+      display: none;
+    }
+  }
 }

@@ -18,3 +18,13 @@ html {
     height: 100%;
   }
 }
+
+.small-modal-dialog {
+  width: 20%;
+}
+
+@media only screen and (max-width: 1650px) {
+  .small-modal-dialog {
+    width: 25%;
+  }
+}

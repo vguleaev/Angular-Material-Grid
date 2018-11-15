@@ -1,4 +1,11 @@
 <mat-card>
-    <ng-mat-grid [config]="gridOptions" [gridName]="'testGrid'"></ng-mat-grid>
+  <ng-mat-grid [config]="gridOptions" [gridName]="'testGrid'">
+    <app-grid-settings [gridOptions]="gridOptions" [gridName]="'entityGrid'"></app-grid-settings>
+  </ng-mat-grid>
 </mat-card>
 
+<ng-template #actionsTemplate let-item="item">
+  <div class="actions-buttons">
+    <button mat-icon-button (click)="deleteEntity(item)"><mat-icon aria-label="delete">delete</mat-icon></button>
+  </div>
+</ng-template>
