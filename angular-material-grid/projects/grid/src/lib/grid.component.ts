@@ -16,7 +16,7 @@ import { GridColumn } from './grid-column';
 import { GridFilter } from './grid-filter';
 import { AbstractGridFilter } from './abstract-grid-filter';
 import { GridService } from './grid.service';
-import { debounceTime, distinctUntilChanged, skip } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'ng-mat-grid',
@@ -108,7 +108,7 @@ export class GridComponent implements OnInit {
       const factory = this.resolver.resolveComponentFactory(filter);
       const componentRef = this.filterContainer.createComponent(factory);
       const filterComponent = componentRef.instance as AbstractGridFilter;
-      filterComponent.grid = this;
+      filterComponent.filterService = this;
       this.customFilters.push(filterComponent);
     });
   }

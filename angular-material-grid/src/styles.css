@@ -23,8 +23,8 @@ html {
   width: 20%;
 }
 
-@media only screen and (max-width: 1650px) {
+@media only screen and (max-width: 580px) {
   .small-modal-dialog {
-    width: 25%;
+    width: 90%;
   }
 }

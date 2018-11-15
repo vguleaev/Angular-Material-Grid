@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractGridFilter, GridComponent, GridFilter, GridFilterType } from 'grid';
+import { AbstractGridFilter, GridFilter, GridFilterType, FilterService } from 'grid';
 import { FormControl } from '@angular/forms';
 import { Positions } from 'src/app/constatns';
 
@@ -9,7 +9,7 @@ import { Positions } from 'src/app/constatns';
   styleUrls: ['./position-filter.component.css']
 })
 export class PositionFilterComponent implements AbstractGridFilter, OnInit {
-  public grid: GridComponent;
+  public filterService: FilterService;
   public name: string;
   public savedFilter: GridFilter;
 
@@ -22,8 +22,8 @@ export class PositionFilterComponent implements AbstractGridFilter, OnInit {
   }
 
   ngOnInit() {
-    if (!this.grid) {
-      throw new Error('Grid reference is required for filter.');
+    if (!this.filterService) {
+      throw new Error('FilterService reference is required for filter.');
     }
 
     if (this.savedFilter) {
@@ -38,11 +38,11 @@ export class PositionFilterComponent implements AbstractGridFilter, OnInit {
         filter.value = JSON.stringify(values.map(x => x.value));
         filter.type = GridFilterType.Equals;
 
-        this.grid.upsertFilter(filter);
-        this.grid.fetch();
+        this.filterService.upsertFilter(filter);
+        this.filterService.fetch();
       } else {
-        this.grid.removeFilter(this.name);
-        this.grid.fetch();
+        this.filterService.removeFilter(this.name);
+        this.filterService.fetch();
       }
     });
   }

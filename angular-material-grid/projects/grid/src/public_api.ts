@@ -12,3 +12,4 @@ export * from './lib/grid-data';
 export * from './lib/grid-filter';
 export * from './lib/grid-filter-type';
 export * from './lib/abstract-grid-filter';
+export * from './lib/filter.service';
