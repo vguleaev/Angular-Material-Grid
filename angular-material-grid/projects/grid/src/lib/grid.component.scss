@@ -17,7 +17,6 @@ $mediumMaxWidth: 992px;
 .grid-filters {
   display: flex;
   flex-wrap: wrap;
-  
 }
 
 .mat-paginator-page-size {
@@ -36,16 +35,16 @@ tr {
 
 th {
   text-align: left;
-  color: rgba(0, 0, 0, .54);
+  color: rgba(0, 0, 0, 0.54);
 }
 
-td, th {
+td,
+th {
   padding: 0.5em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 
 .grid {
   @media (max-width: $mediumMaxWidth) {
@@ -96,7 +95,6 @@ td, th {
   }
   .mat-expansion-panel-header-description,
   .mat-expansion-panel-header-title {
-
     align-items: center;
     & ::ng-deep a {
       color: black;
@@ -104,23 +102,23 @@ td, th {
       pointer-events: none;
     }
   }
-  
+
   ::ng-deep {
     .mat-expansion-panel-body {
       padding: 0 17px 16px;
       table {
         td {
           white-space: normal;
-          &:nth-of-type(1){
+          &:nth-of-type(1) {
             white-space: nowrap;
             padding-right: 1em;
           }
-          &:nth-of-type(2){
+          &:nth-of-type(2) {
             width: 80%;
           }
         }
         tr {
-          &:nth-last-of-type(1){
+          &:nth-last-of-type(1) {
             border-bottom: none;
           }
         }

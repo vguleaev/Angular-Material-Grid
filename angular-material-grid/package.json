@@ -11,7 +11,7 @@
     "e2e": "ng e2e",
     "packagr": "ng-packagr -p ng-package.json",
     "format:fix": "pretty-quick --staged",
-    "format:fix-all": "pretty-quick",
+    "format:fix-all": "prettier --write **/*{.ts,.css,.scss}",
     "format:check": "prettier --config ./.prettierrc --list-different \"src/{app,environments,assets}/**/*{.ts,.js,.json,.css,.scss}\"",
     "format:check-grid": "prettier --config ./.prettierrc --list-different \"projects/grid/src/lib/**/*{.ts,.js,.json,.css,.scss}\"",
     "publish-gh": "ng build --prod --base-href https://vguleaev.github.io/Angular-Material-Autocomplete/ && angular-cli-ghpages"
@@ -67,6 +67,8 @@
     "tsickle": "^0.33.1",
     "tslib": "^1.7.1",
     "tslint": "~5.9.1",
+    "tslint-config-prettier": "^1.16.0",
+    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "~2.7.2"
   }
 }
