@@ -1,6 +1,5 @@
 # Angular Material Grid
-This is an alternative solution for standard [mat-table](https://material.angular.io/components/table/overview), made to simplify and minimize fetch and display data in a grid. It can remember currrent grid state, take one single config object to control columns, sort, order, cell display format and pagination.You can apply additional custom filters with its logic, change column display format with
-any rich template. Mobile view is also supported.
+This is an alternative solution for standard [mat-table](https://material.angular.io/components/table/overview), made to simplify and minimize fetch and display data in a grid. It can remember currrent grid state, take one single config object to control columns displayed, order, data sorting, cell display format and pagination. You can apply additional custom filters with its logic, change column display format with a rich template. Mobile view is also supported.
 
 See the [demo here.](https://vguleaev.github.io/Angular-Material-Grid/)
 
@@ -149,7 +148,7 @@ export enum GridFilterType {
 
 ## Examples
 
-Component can not be used without proper defined config object.
+> Component can not be used without proper defined config object.
 
 ### Basic usage
 
@@ -163,28 +162,30 @@ All fetch logic is implemented in dataService service which should implement [Gr
   gridName: string = 'usersGrid';
   
   constructor(private dataService: DataService) {
-    this.gridOptions.searchPlaceholder = 'Search by name';
-    this.gridOptions.source = this.dataService;
-    this.gridOptions.pageSize = 5;
-    this.gridOptions.mobileViewColumnIndex = 1; // in mobile view 'Name' will be card header
-    this.gridOptions.rememberState = true;  // this options requires gridName attribute 
-    this.gridOptions.columns = new Array<GridColumn>();
-    this.gridOptions.columns.push({
-      name: 'id',
-      label: 'Id',
-      searchable: false,
-      sortable: true,
-      disabled: false,
-      content: (item: any) => item.id
-    });
-    this.gridOptions.columns.push({
-      name: 'name',
-      label: 'Name',
-      searchable: true,
-      sortable: true,
-      disabled: false,
-      content: (item: any) => item.name
-    });
+      this.gridOptions = {
+        searchPlaceholder: 'Search by name',
+        source: this.dataService,
+        pageSize: 5,
+        mobileViewColumnIndex: 1,
+        rememberState: false,
+        filters: [],
+        columns: [{
+          name: 'id',
+          label: 'Id',
+          searchable: false,
+          sortable: true,
+          disabled: false,
+          content: (item: any) => item.id
+        },
+        {
+          name: 'name',
+          label: 'Name',
+          searchable: true,
+          sortable: true,
+          disabled: false,
+          content: (item: any) => item.name
+        }
+      ]} as GridConfig;
   }
   
   // in html template
