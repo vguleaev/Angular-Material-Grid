@@ -134,8 +134,8 @@ export class GridColumn {
 *Sortable*   : Make this column available for sorting. <br/>
 *Disabled*   : Hides the column from UI. <br/>
 *Conent*     : Is used to change display format for column. You can a pass a function or TemplateRef.  <br/><br/>
-Function recieves item for current row and does any logic you want. (e.g. (item:any) => item.toLowerCase() ). <br/> <br/>
 
+Function recieves item for current row and does any logic you want. (e.g. (item:any) => item.toLowerCase() ). <br/>
 TemplateRef is an HTML template saved as @ViewChild in component from above and passed as a reference. Tempalte should be <ng-template> attribute that recieves item as context.  <br/>
 **Note that @ViewChild is not availble in contructor yet. Use ngAfterViewInit() or ngOnInit()!** <br/>
 
@@ -183,6 +183,27 @@ export enum GridFilterType {
     Between = 3
 }
 ```
+To add custom filters you should create new component and implement *AbstractGridFilter* interface. This component will be created dinamicly chrout componentFactory and a reference to grid component will be passed to property *filterService: FilterService*.
+
+You can implement any logic to add or remove filters to state and also call fetch by demand. <br/>
+**Dont forget to add this component into entryComponents array in your module!**
+
+```javascript
+gridOptions: GridConfig = new GridConfig();
+
+this.gridOptions.filters = [PositionFilterComponent];
+
+...
+// position-filter.component.ts
+export class PositionFilterComponent implements AbstractGridFilter, OnInit {
+  public filterService: FilterService;
+  public name: string;
+  public savedFilter: GridFilter;
+  ...  
+}
+```
+
+See here how to implement a [custom filter](#custom_filter).
 
 ## Examples
 
@@ -230,7 +251,9 @@ All fetch logic is implemented in dataService service which should implement [Gr
   // in html template
   <ng-mat-grid [config]="gridConfig" [gridName]="gridName"> </ng-mat-grid>
 ```
+### Content projection
 
+### Custom filter
 
 
 
