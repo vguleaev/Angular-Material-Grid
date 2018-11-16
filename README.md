@@ -264,6 +264,15 @@ Use any html or component instead of <app-grid-settings> to render something abo
 ### Custom filter
 
 Here you can find a simple example how to implement filter by some Outcome type. We create a component and implement AbstractGridFilter.
+
+```
+export interface AbstractGridFilter {
+    filterService: FilterService;
+    name: string;
+    savedFilter: GridFilter;
+}
+```
+
 In tempalte we render a select for types. When user selects it onChange() function fires. It insert a filter to state and calls fetch, so we get a filtered result back. 
 
 If you want to use remeber state feature you must to implement a restore logic to filter from savedFilter property. Name also is required to save/restore filter from localStorage.
@@ -285,7 +294,7 @@ If you want to use remeber state feature you must to implement a restore logic t
 
 ```javascript
 export class OutcomeFilterComponent implements OnInit, AbstractGridFilter {
-    public grid: GridComponent;
+    public filterService: FilterService;;
     public name = "OutcomeFilter";
     public savedFilter: GridFilter;
 
@@ -297,7 +306,7 @@ export class OutcomeFilterComponent implements OnInit, AbstractGridFilter {
     }
 
     ngOnInit(): void {
-        if (!this.grid) { throw new Error("Grid reference is required for filter."); }
+        if (!this.filterService) { throw new Error("FilterService reference is required for filter."); }
 
         if (this.savedFilter) {
             this.selectedValue = this.savedFilter.value;
@@ -312,11 +321,11 @@ export class OutcomeFilterComponent implements OnInit, AbstractGridFilter {
             filter.value = this.selectedValue;
             filter.type = GridFilterType.Equals;
 
-            this.grid.upsertFilter(filter);
-            this.grid.fetch();
+            this.filterService.upsertFilter(filter);
+            this.filterService.fetch();
         } else {
-            this.grid.removeFilter(this.name);
-            this.grid.fetch();
+            this.filterService.removeFilter(this.name);
+            this.filterService.fetch();
         }
     }
 }
