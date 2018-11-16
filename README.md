@@ -128,18 +128,19 @@ export class GridColumn {
     disabled: boolean;
 }
 ```
-*Name*: Represnets unique name to identify column when implement searching or filterting.  <br/>
-*Label*: String shows in table header. <br/>
+*Name*       : Represnets unique name to identify column when implement searching or filterting.  <br/>
+*Label*      : String shows in table header. <br/>
 *Searcheable*: Saves column name in searchColumns array of GridState. <br/>
-"Sortable": Make this column available for sorting. <br/>
-*Disabled*: Hides the column from UI. <br/>
-*Conent*: Is used to change display format for column. You can a pass a function or TemplateRef.  <br/>
-Function recieves item for current row and does any logic you want. (e.g. (item:any) => item.toLowerCase() ). <br/>
+*Sortable*   : Make this column available for sorting. <br/>
+*Disabled*   : Hides the column from UI. <br/> <br/>
+*Conent*     : Is used to change display format for column. You can a pass a function or TemplateRef.  <br/> <br/>
+Function recieves item for current row and does any logic you want. (e.g. (item:any) => item.toLowerCase() ). <br/> <br/>
 TemplateRef is an HTML template saved as @ViewChild in component from above and passed as a reference. Tempalte should be <ng-template> attribute that recieves item as context.  <br/>
 **Note that @ViewChild is not availble in contructor yet. Use ngAfterViewInit() or ngOnInit()!** <br/>
 
 See example below for delete icon template.
-```
+
+```javascript
 @ViewChild('actionsTemplate') actionsTemplate: TemplateRef<any>;
 gridOptions: GridConfig = new GridConfig();
 
