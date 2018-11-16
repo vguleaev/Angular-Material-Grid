@@ -109,12 +109,12 @@ export class GridState {
 | Property        | Default Value   |  Description |
 | -------------    | --------------  | ------------- |
 | query            |  ""             | String. Current text in search input. |
-| searchColumns    |  null           | Array<string>. Columns names (not labels) that are marked as `searchable`. Component collects all the names of searchable columns and put them into array. The backend api should implement the logic when text from `query` contains in any of these columns. It represents search by multimple properties. `(firstName == 'Vlad' OR lastName == 'Vlad')` |
+| searchColumns    |  null           | Array of string. Columns names (not labels) that are marked as `searchable`. Component collects all the names of searchable columns and put them into array. The backend api should implement the logic when text from `query` contains in any of these columns. It represents search by multimple properties. `(firstName == 'Vlad' OR lastName == 'Vlad')` |
 | orderDirection   | 'asc'           |  Can be two strings `'asc' or 'desc'`. Represents order direction. |
 | orderBy          | ""              | String. Column name by which order is done. |
-| page             | 0               | Number. Current page index. |
+| page             |  0              | Number. Current page index. |
 | pageSize         |  0              | Number. Can be ignored on the backend if size is fixed. When size if fixed you should set the same page size on the GridConfig and on the backend api.|
-| filters          | [ ]              | Array of **GridFilter**. Contains all custom filters if they exist. GridFilter has properties like column name, value and type. The backend api should implement the logic along standard search to support additional filters.<br/> <br/> e.g. Show only items with type == 'New'. <br/><br/> In such case TypeFilter has columName = 'type' and value = 'New'.  It represents filter by additional conditions. `((firstName == 'Vlad' OR lastName == 'Vlad') AND type == 'New')` | 
+| filters          | [ ]              | Array of [GridFilter](#gridfilter). Contains all custom filters if they exist. GridFilter has properties like column name, value and type. The backend api should implement the logic along standard search to support additional filters.<br/> <br/> e.g. Show only items with type == 'New'. <br/><br/> In such case TypeFilter has columName = 'type' and value = 'New'.  It represents filter by additional conditions. `((firstName == 'Vlad' OR lastName == 'Vlad') AND type == 'New')` | 
  
 ### GridColumn ### 
 
@@ -124,9 +124,44 @@ export class GridColumn {
     label: string;
     searchable: boolean;
     sortable: boolean;
-    content: any;
+    content: TemplateRef<any> | (item: any) => string;
     disabled: boolean;
 }
+```
+*Name*: Represnets unique name to identify column when implement searching or filterting.  <br/>
+*Label*: String shows in table header. <br/>
+*Searcheable*: Saves column name in searchColumns array of GridState. <br/>
+"Sortable": Make this column available for sorting. <br/>
+*Disabled*: Hides the column from UI. <br/>
+*Conent*: Is used to change display format for column. You can a pass a function or TemplateRef.  <br/>
+Function recieves item for current row and does any logic you want. (e.g. (item:any) => item.toLowerCase() ). <br/>
+TemplateRef is an HTML template saved as @ViewChild in component from above and passed as a reference. Tempalte should be <ng-template> attribute that recieves item as context.  <br/>
+**Note that @ViewChild is not availble in contructor yet. Use ngAfterViewInit() or ngOnInit()!** <br/>
+
+See example below for delete icon template.
+```
+@ViewChild('actionsTemplate') actionsTemplate: TemplateRef<any>;
+gridOptions: GridConfig = new GridConfig();
+
+this.gridOptions.push(
+        {
+          name: 'actions',
+          label: '',       // hides label from table <td>
+          searchable: false,
+          sortable: false,
+          disabled: false,
+          content: this.actionsTemplate
+        }
+)
+
+/// HTML Template
+
+<ng-template #actionsTemplate let-item="item">
+  <div class="actions-buttons">
+    <button mat-icon-button (click)="deleteEntity(item)"><mat-icon aria-label="delete">delete</mat-icon></button>
+  </div>
+</ng-template>
+
 ```
 
  ### GridFilter ### 
