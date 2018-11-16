@@ -183,7 +183,7 @@ export enum GridFilterType {
     Between = 3
 }
 ```
-To add custom filters you should create new component and implement *AbstractGridFilter* interface. This component will be created dinamicly chrout componentFactory and a reference to grid component will be passed to property *filterService: FilterService*.
+To add custom filters you should create new component and implement *AbstractGridFilter* interface. This component will be created dynamically through componentFactory and a reference to grid component will be passed to property *filterService: FilterService*.
 
 You can implement any logic to add or remove filters to state and also call fetch by demand. <br/>
 **Dont forget to add this component into entryComponents array in your module!**
@@ -193,17 +193,16 @@ gridOptions: GridConfig = new GridConfig();
 
 this.gridOptions.filters = [PositionFilterComponent];
 
-...
 // position-filter.component.ts
 export class PositionFilterComponent implements AbstractGridFilter, OnInit {
   public filterService: FilterService;
   public name: string;
   public savedFilter: GridFilter;
-  ...  
+  // ...  
 }
 ```
 
-See here how to implement a [custom filter](#custom_filter).
+See here how to implement a [custom filter](#custom-filter).
 
 ## Examples
 
@@ -253,7 +252,74 @@ All fetch logic is implemented in dataService service which should implement [Gr
 ```
 ### Content projection
 
+If you want to use the space above the grid right after search input and filters (if they exist), you can use Angular content projection. See example below:
+
+```html
+  <ng-mat-grid [config]="gridOptions" [gridName]="'testGrid'">
+    <app-grid-settings></app-grid-settings>
+  </ng-mat-grid>
+```
+Use any html or component instead of <app-grid-settings> to render something above the grid but inside GridComponent div.
+
 ### Custom filter
 
+Here you can find a simple example how to implement filter by some Outcome type. We create a component and implement AbstractGridFilter.
+In tempalte we render a select for types. When user selects it onChange() function fires. It insert a filter to state and calls fetch, so we get a filtered result back. 
+
+If you want to use remeber state feature you must to implement a restore logic to filter from savedFilter property. Name also is required to save/restore filter from localStorage.
+
+```html
+<div class="outcome-filter">
+    <mat-form-field>
+        <mat-select placeholder="Filter by Outcome" [(ngModel)]="selectedValue" (ngModelChange)="onChange($event)">
+          <mat-option [value]="null">No filter</mat-option>
+          <ng-template ngFor let-item="$implicit" [ngForOf]="outcomes">
+              <mat-option [value]="item.name">
+                  {{item.name}}
+                </mat-option>
+          </ng-template>
+        </mat-select>
+    </mat-form-field>
+</div>
+```
+
+```javascript
+export class OutcomeFilterComponent implements OnInit, AbstractGridFilter {
+    public grid: GridComponent;
+    public name = "OutcomeFilter";
+    public savedFilter: GridFilter;
+
+    selectedValue = "";
+    outcomes: Outcome[] = new Array<Outcome>();
+
+    constructor(private outcomeService: OutcomeService) {
+        this.outcomeService.fetch().then(outcomes => this.outcomes = outcomes);
+    }
+
+    ngOnInit(): void {
+        if (!this.grid) { throw new Error("Grid reference is required for filter."); }
+
+        if (this.savedFilter) {
+            this.selectedValue = this.savedFilter.value;
+        }
+    }
+
+    onChange(value: any) {
+        if (value) {
+            const filter = new GridFilter();
+            filter.name = this.name;
+            filter.columnName = "outcome";
+            filter.value = this.selectedValue;
+            filter.type = GridFilterType.Equals;
+
+            this.grid.upsertFilter(filter);
+            this.grid.fetch();
+        } else {
+            this.grid.removeFilter(this.name);
+            this.grid.fetch();
+        }
+    }
+}
+```
 
 
